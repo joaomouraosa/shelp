@@ -183,6 +183,53 @@ INFO = {
             '# Find text in multiple files) $ find ./folder -type f -name "*.txt" -exec grep \'test\' {} \; ',
         ]
     },
+    'sort': {
+        "Syntax": ["[INPUT] | sort [OPTIONS]   (or)   sort [Options] [INPUT]"],
+        "Options": [
+            "-r Sort in reverse order",
+            "-n Numerically",
+            "-k [N] sort by column [N]",
+            "-c check if it's sorted or not",
+            "-u remove duplicates"
+        ],
+        "Examples": [
+            " $ cat file.txt",
+            " > A B 2",
+            " > B A 1",
+            "# Sort by column 1)                $ cat file.txt | sort -k1",
+            "                                   > A B 2",
+            "                                   > B A 1",
+            "# Sort numerically by column 3)    $ cat file.txt | sort -n -k3",
+            "                                   > B A 1",
+            "                                   > A B 2",
+            "# Reverse sort)                    $ cat file.txt | sort -n -k3 -r",
+            "                                   > A B 2",
+            "                                   > B A 1",
+        ]
+    },
+    'shell': {
+        'Function': [
+            'var=\'A\'',
+            'fun() { ',
+            '  var=\'B\'',
+            '  local result="var=$var, arg=$1"',
+            '  echo "$result"',
+            '}',
+            'result="$(fun "arg")"',
+            'echo $result',
+            '> var=B, arg=arg',
+            'echo $var',
+            '> A',
+        ],
+        'Loop': {
+            'While': [
+                'while true',
+                'do',
+                '  echo "Press [CTRL+C] to stop.."',
+                'done',
+            ]
+        }
+    },
     'cut': {
         'About': ['Cuts out sections from each line of FILES and returns them to STDOUT.'],
         'Syntax': ['cut [Flags...] [FILE...]'],
@@ -208,6 +255,9 @@ INFO = {
             '                                   > a,b',
             '# Negate the result)               $ echo "a b c" | cut -f 1-2 -d ' ' --output-delimiter=\',\' --negate',
             '                                   > c',
+            '# Multiple spaces)                 $ echo "a  b c"| awk \'{ print $2 }\''
+            '                                   > a',
+
         ],
     },
     'how-script': {
@@ -292,15 +342,16 @@ INFO = {
     'top': {},
     'awk': {},
     'git': {
-        "Basic commands": [
+        "Examples": [
+            '# Cloning from a remote repo with SSH:      $ git clone git@gitlab.com:aa.git',
+            '# Merge a remote branch into the local one: $ git pull origin master',
+            '# Stage the local changes on file1:         $ git add file1',
+            '# Make sure the changes are saved locally:  $ git commit -m "commit message"',
+            '# Push the local branch to the remote:      $ git push -u origin master'
+        ],
+        "Other commands": [
             '$ git init     # Creates an empty repository. A .git folder is created ',
-            '$ git clone    # Creates a local copy of a remote repository',
-            '$ git add      # Moves changes from the local directory to the staging area.',
-            '$ git commit   # Makes sure the changes are saved to the local repository',
-            '$ git push     # Moves the local commits to the remote repository',
-            '$ git pull     # Merges a remote branch into the current branch.',
             '$ git checkout # Allows to switch branches',
-            '$ git merge    # Merge different branches together',
             '$ git status   # Tells the current state of the repository',
             '$ git config   # Configures the user.name and user.email ',
         ],
@@ -308,22 +359,37 @@ INFO = {
             '* Branches are isolated development environments withing a repository',
             '# View branches:                              $ git branch ',
             '# Create a new branch:                        $ git branch <branch>',
-            '# Push the new branch to the remote repo:     $ git push -u <remote> <branch>',
             '# Removing a branch:                          $ git branch -d <branch> ',
+            '# Push the new branch to the remote repo:     $ git push -u <remote> <branch>',
             '# Merge the staging branch to the stable one: $ git merge <branch> ',
         ],
-        "Examples": [
-            '# Cloning code from a remote repository:  $ git clone <https://repo-link>',
-            '# Cloning with SSH:                       $ git clone git@gitlab.com:aa.git',
-            '# Pull the master branch of the remote repo:   $ git pull    origin master',
-            '# Push  the local branch to the remote repo:   $ git push -u origin master'
-        ],
 
+        "Authentication": [
+            '# 1) Paste your pub key in https://github.com/settings/ssh/new',
+            '  $ ssh-keygen -t ed25519 -C [EMAIL] && ssh-add ~/.ssh/id_ed25519.pub',
+            '# 2) Check if you are connected to github',
+            '  $ ssh -T git@github.com',
+            '# 3) Switch remote URLs from HTTPS to SSH',
+            '  $ git remote set-url origin git@github.com:[USERNAME]/[REPO].git'
+        ]
     },
-
+    "python": {
+        "Environment": [
+            "# Create an environment:           $ python3 -m venv [PATH]",
+            "# Activate an environment:         $ source [PATH]/bin/activate",
+            "# Deactivate:                      $ deactivate",
+        ],
+        "Packages": [
+            "# List installed packages:          $ pip list",
+            "# Install a package:                $ pip install [PACKAGE]",
+            "# Install from a requirements file: $ pip install -r requirements.txt",
+            "# Save the env packages to a file:  $ pip freeze > requirements.txt",
+        ]
+    },
 }
 
-
+# create a token, use it in the password field of the git push -u origin master
 
 # if [ ! -d "$DIR" ]; then echo "The path provided doesn't exist. Quitting..."; exit 1; fi
 
+# 0A30-79AF
