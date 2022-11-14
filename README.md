@@ -2,11 +2,14 @@
 
 CLI to help me remember how to perform certain tasks
 
-#### See the available commands
-shelp.py 
+python shelp.py # See the available commands
+python shelp.py xargs # E.g., see how the xargs command can be used
 
-#### E.g., see how the xargs command can be used
-shelp.py xargs
+ln -s $PWD/shelp.py ~/.local/bin/shelp # Create a symbolic link
+
+shelp.py xargs 
+
+
 
 
 
