@@ -1,6 +1,6 @@
 # shelp
 
-CLI to help me remember how to perform certain tasks
+CLI to help me remember how to perform things
 
 > python shelp.py # see the available commands
 
